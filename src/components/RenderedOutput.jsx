@@ -1,11 +1,60 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../css/shared.scss";
 import "../css/output.scss";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 const RenderedOutput = (props) => {
   const { basicInfo, education, jobExperience } = props;
+
+  // This whole function has been copied from the internet
+  // Big help and idea from https://stackoverflow.com/a/55464892
+  // Multi page implementation from https://www.freakyjolly.com/multipage-canvas-pdf-using-jspdf/
+  const _exportPdf = () => {
+    let HTML_Width = document
+      .querySelector(".outputArea")
+      .getBoundingClientRect().width;
+    let HTML_Height = document
+      .querySelector(".outputArea")
+      .getBoundingClientRect().height;
+    let top_left_margin = 15;
+    let PDF_Width = HTML_Width + top_left_margin * 2;
+    let PDF_Height = PDF_Width * 1.5 + top_left_margin * 2;
+    let canvas_image_width = HTML_Width;
+    let canvas_image_height = HTML_Height;
+
+    let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+    html2canvas(document.querySelector(".outputArea")).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      let pdf = new jsPDF("p", "pt", [PDF_Width, PDF_Height]);
+      pdf.addImage(
+        imgData,
+        "JPG",
+        top_left_margin,
+        top_left_margin,
+        canvas_image_width,
+        canvas_image_height
+      );
+      for (let i = 1; i <= totalPDFPages; i++) {
+        pdf.addPage();
+        pdf.addImage(
+          imgData,
+          "JPG",
+          top_left_margin,
+          -(PDF_Height * i) + top_left_margin * 4,
+          canvas_image_width,
+          canvas_image_height
+        );
+      }
+      pdf.save(`${basicInfo.fullName}'s CV.pdf`);
+    });
+  };
+
   return (
     <div className="outputContainer">
+      <button className="downloadPdf" onClick={_exportPdf}>
+        Download PDF
+      </button>
       <div className="outputArea">
         <div className="basicInfo">
           <p className="fullname">{basicInfo.fullName}</p>

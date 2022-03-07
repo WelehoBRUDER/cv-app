@@ -9,10 +9,21 @@
   background: $bg-light;
 
   .outputArea {
-    height: 95%;
-    background: $bg-grey;
+    min-height: 90%;
+    height: auto;
+    background: $bg-light;
     margin: 2.5%;
     overflow: hidden;
-    overflow-y: auto;
+    overflow-y: show;
+    border: 0.25vw solid $border-light;
+
+    h1,
+    h2,
+    h3,
+    p {
+      padding: 0;
+      margin: 0;
+      margin-left: 1vw;
+    }
   }
 }

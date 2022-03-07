@@ -9,32 +9,23 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: $bg-light;
 }
 
 .wrapper {
-  width: 100vw;
-  height: 56.25vw;
-  max-height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-
   h1 {
-    font-size: 1.75vw;
+    font-size: 36px;
   }
 
   h2 {
-    font-size: 1.25vw;
+    font-size: 30px;
   }
 
   h3 {
-    font-size: 1vw;
+    font-size: 25px;
   }
 
   p {
-    font-size: 0.75vw;
+    font-size: 20px;
   }
 }
