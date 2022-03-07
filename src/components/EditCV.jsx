@@ -74,30 +74,28 @@ const EditCV = (props) => {
   return (
     <div className="editCV">
       <div className="editBasicInfo">
-        <input
-          type="text"
-          className="name"
-          value={basicInfo.fullName}
-          onChange={(e) => editBasicInfo({ fullName: e.target.value })}
-        />
-        <input
-          type="text"
-          className="email"
-          value={basicInfo.email}
-          onChange={(e) => editBasicInfo({ email: e.target.value })}
-        />
-        <input
-          type="text"
-          className="number"
-          value={basicInfo.phoneNumber}
-          onChange={(e) => editBasicInfo({ phoneNumber: e.target.value })}
-        />
-        <textarea
-          type="text"
-          className="desc"
-          value={basicInfo.desc}
-          onChange={(e) => editBasicInfo({ desc: e.target.value })}
-        />
+        {Object.entries(basicInfo).map((info) => {
+          const key = info[0];
+          const value = info[1];
+          if (key !== "desc")
+            return (
+              <input
+                type={typeof value === "string" ? "text" : "number"}
+                className={key}
+                value={value}
+                onChange={(e) => editBasicInfo({ [key]: e.target.value })}
+              />
+            );
+          else
+            return (
+              <textarea
+                type="text"
+                className={key}
+                value={value}
+                onChange={(e) => editBasicInfo({ [key]: e.target.value })}
+              />
+            );
+        })}
       </div>
       <div className="editEducation">
         <button className="createNewEducation" onClick={addEducation}>
@@ -106,60 +104,20 @@ const EditCV = (props) => {
         {education.map((edu, index) => {
           return (
             <div className="eduTemplate">
-              <input
-                type="text"
-                className="eduName"
-                value={edu.name}
-                onChange={(e) =>
-                  editEducation({ name: e.target.value, index: index })
-                }
-              />
-              <input
-                type="text"
-                className="eduType"
-                value={edu.type}
-                onChange={(e) =>
-                  editEducation({ type: e.target.value, index: index })
-                }
-              />
-              <input
-                type="text"
-                className="eduTitle"
-                value={edu.title}
-                onChange={(e) =>
-                  editEducation({ title: e.target.value, index: index })
-                }
-              />
-              <input
-                type="text"
-                className="eduDesc"
-                value={edu.desc}
-                onChange={(e) =>
-                  editEducation({ desc: e.target.value, index: index })
-                }
-              />
-              <input
-                type="number"
-                className="eduStart"
-                value={edu.date.start}
-                onChange={(e) =>
-                  editEducation({
-                    date: { start: e.target.value, end: edu.date.end },
-                    index: index,
-                  })
-                }
-              />
-              <input
-                type="number"
-                className="eduEnd"
-                value={edu.date.end}
-                onChange={(e) =>
-                  editEducation({
-                    date: { start: edu.date.start, end: e.target.value },
-                    index: index,
-                  })
-                }
-              />
+              {Object.entries(edu).map((slot) => {
+                const key = slot[0];
+                const value = slot[1];
+                return (
+                  <input
+                    type={typeof value === "string" ? "text" : "number"}
+                    className={`edu${key}`}
+                    value={value}
+                    onChange={(e) =>
+                      editEducation({ [key]: e.target.value, index: index })
+                    }
+                  />
+                );
+              })}
               <button
                 className="removeEdu"
                 onClick={() => removeEducation(index)}
@@ -176,53 +134,21 @@ const EditCV = (props) => {
         </button>
         {jobExperience.map((job, index) => {
           return (
-            <div className="eduTemplate">
-              <input
-                type="text"
-                className="jobName"
-                value={job.name}
-                onChange={(e) =>
-                  editJob({ name: e.target.value, index: index })
-                }
-              />
-              <input
-                type="text"
-                className="jobTitle"
-                value={job.jobTitle}
-                onChange={(e) =>
-                  editJob({ jobTitle: e.target.value, index: index })
-                }
-              />
-              <input
-                type="text"
-                className="jobTask"
-                value={job.jobTask}
-                onChange={(e) =>
-                  editJob({ jobTask: e.target.value, index: index })
-                }
-              />
-              <input
-                type="number"
-                className="jobStart"
-                value={job.date.start}
-                onChange={(e) =>
-                  editJob({
-                    date: { start: e.target.value, end: job.date.end },
-                    index: index,
-                  })
-                }
-              />
-              <input
-                type="number"
-                className="jobEnd"
-                value={job.date.end}
-                onChange={(e) =>
-                  editJob({
-                    date: { start: job.date.start, end: e.target.value },
-                    index: index,
-                  })
-                }
-              />
+            <div className="jobTemplate">
+              {Object.entries(job).map((slot) => {
+                const key = slot[0];
+                const value = slot[1];
+                return (
+                  <input
+                    type={typeof value === "string" ? "text" : "number"}
+                    className={`job${key}`}
+                    value={value}
+                    onChange={(e) =>
+                      editJob({ [key]: e.target.value, index: index })
+                    }
+                  />
+                );
+              })}
               <button className="removeJob" onClick={() => removeJob(index)}>
                 Remove
               </button>

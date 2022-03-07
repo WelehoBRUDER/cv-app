@@ -17,14 +17,16 @@ function App() {
       type: "college",
       title: "Sample",
       desc: "College ball.",
-      date: { start: 2002, end: 2005 },
+      start: 2002,
+      end: 2005,
     },
     {
       name: "University of Smithland",
       type: "university",
       title: "CS",
       desc: "I studied here.",
-      date: { start: 2006, end: 2011 },
+      start: 2006,
+      end: 2011,
     },
   ]);
   const [jobExperience, setJobExperience] = React.useState([
@@ -33,7 +35,8 @@ function App() {
       jobTitle: "Web developer",
       jobTask:
         "I improved and maintained the company's main website using react.",
-      date: { start: 2011, end: 2019 },
+      start: 2011,
+      end: 2019,
     },
   ]);
 

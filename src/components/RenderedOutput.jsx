@@ -22,7 +22,7 @@ const RenderedOutput = (props) => {
                 <p className="schoolDesc">{school.desc}</p>
                 <p className="educationTitle">{school.title}</p>
                 <p className="schoolDate">
-                  {school.date.start + " - " + school.date.end}
+                  {school.start + " - " + school.end}
                 </p>
               </div>
             );
@@ -36,9 +36,7 @@ const RenderedOutput = (props) => {
                 <h3 className="companyName">{job.name}</h3>
                 <p className="jobTitle">{job.jobTitle}</p>
                 <p className="jobTask">{job.jobTask}</p>
-                <p className="jobDate">
-                  {job.date.start + " - " + job.date.end}
-                </p>
+                <p className="jobDate">{job.start + " - " + job.end}</p>
               </div>
             );
           })}
