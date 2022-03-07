@@ -1,0 +1,18 @@
+@use "./shared.scss" as *;
+
+.outputContainer {
+  width: 45%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $bg-light;
+
+  .outputArea {
+    height: 95%;
+    background: $bg-grey;
+    margin: 2.5%;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+}

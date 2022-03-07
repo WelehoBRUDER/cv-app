@@ -1,0 +1,25 @@
+@use "./shared.scss" as *;
+
+.editCV {
+  width: 55%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: $bg-light;
+  display: flex;
+  justify-content: center;
+  align-items: top;
+
+  .editBasicInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 50%;
+    height: 20%;
+    margin: 5%;
+
+    textarea {
+      resize: vertical;
+    }
+  }
+}
