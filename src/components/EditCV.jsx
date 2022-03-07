@@ -90,37 +90,39 @@ const EditCV = (props) => {
   return (
     <div className="editCV">
       <div className="edit BasicInfo">
-        {Object.entries(basicInfo).map((info) => {
-          const key = info[0];
-          const value = info[1];
-          if (key === "index") return;
-          if (key !== "desc")
-            return (
-              <div className="inputWrapper">
-                <label htmlFor={`basic${key}`}>{loc[key]}</label>
-                <input
-                  type={typeof value === "string" ? "text" : "number"}
-                  className={key}
-                  id={`basic${key}`}
-                  value={value}
-                  onChange={(e) => editBasicInfo({ [key]: e.target.value })}
-                />
-              </div>
-            );
-          else
-            return (
-              <div className="textWrapper">
-                <label htmlFor={`basic${key}`}>{loc[key]}</label>
-                <textarea
-                  type="text"
-                  className={key}
-                  id={`basic${key}`}
-                  value={value}
-                  onChange={(e) => editBasicInfo({ [key]: e.target.value })}
-                />
-              </div>
-            );
-        })}
+        <div className="Template">
+          {Object.entries(basicInfo).map((info) => {
+            const key = info[0];
+            const value = info[1];
+            if (key === "index") return;
+            if (key !== "desc")
+              return (
+                <div className="inputWrapper">
+                  <label htmlFor={`basic${key}`}>{loc[key]}</label>
+                  <input
+                    type={typeof value === "string" ? "text" : "number"}
+                    className={key}
+                    id={`basic${key}`}
+                    value={value}
+                    onChange={(e) => editBasicInfo({ [key]: e.target.value })}
+                  />
+                </div>
+              );
+            else
+              return (
+                <div className="textWrapper">
+                  <label htmlFor={`basic${key}`}>{loc[key]}</label>
+                  <textarea
+                    type="text"
+                    className={key}
+                    id={`basic${key}`}
+                    value={value}
+                    onChange={(e) => editBasicInfo({ [key]: e.target.value })}
+                  />
+                </div>
+              );
+          })}
+        </div>
       </div>
       <div className="edit Education">
         <button className="createNewEducation" onClick={addEducation}>

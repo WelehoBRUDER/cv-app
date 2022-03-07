@@ -20,6 +20,7 @@
   }
 
   .edit {
+    position: relative;
     margin: 5%;
 
     button {
@@ -30,15 +31,33 @@
     }
 
     .Template {
-      .inputWrapper {
+      position: relative;
+      border: 8px solid $border-dark;
+      padding: 5px;
+      margin: 10px;
+      width: min-content;
+
+      .inputWrapper,
+      .textWrapper {
+        position: relative;
+        width: 600px;
+        height: auto;
+        border: 4px solid $border-light;
+        padding: 5px;
+        white-space: nowrap;
+        margin: 5px;
+        display: grid;
+
         label {
           font-size: 20px;
         }
 
-        input {
+        input,
+        textarea {
           margin: 10px;
           margin-top: 2px;
           margin-bottom: 2px;
+          margin-left: auto;
         }
       }
       button.remove {
