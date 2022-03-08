@@ -7,9 +7,11 @@ const EditCV = (props) => {
     basicInfo,
     setBasicInfo,
     education,
+    skills,
     setEducation,
     jobExperience,
     setJobExperience,
+    setSkills,
   } = props;
 
   function editBasicInfo(data) {
@@ -73,6 +75,31 @@ const EditCV = (props) => {
     return setJobExperience(jobEditing);
   }
 
+  function editSkill(data) {
+    const index = data.index;
+    const skillEditing = [...skills];
+    let editObj = { ...skillEditing[index] };
+    editObj = { ...editObj, ...data };
+    skillEditing[index] = editObj;
+    return setSkills(skillEditing);
+  }
+
+  function removeSkill(index) {
+    const skillEditing = [...skills];
+    skillEditing.splice(index, 1);
+    return setSkills(skillEditing);
+  }
+
+  function addSkill() {
+    const defJob = {
+      skill: "Skill",
+      level: 0,
+    };
+    const skillEditing = [...skills];
+    skillEditing.push(defJob);
+    return setSkills(skillEditing);
+  }
+
   const loc = {
     name: "Name",
     fullName: "Fullname",
@@ -85,6 +112,16 @@ const EditCV = (props) => {
     desc: "Description",
     start: "Year started",
     end: "Year ended",
+    skill: "Skill",
+    level: "Experience level",
+  };
+
+  const skillLevels = {
+    0: "Beginner",
+    1: "Basic",
+    2: "Good",
+    3: "Great",
+    4: "Excellent",
   };
 
   return (
@@ -123,6 +160,53 @@ const EditCV = (props) => {
               );
           })}
         </div>
+      </div>
+      <div className="edit Skills">
+        <button className="createNewSkill" onClick={addSkill}>
+          Add Skill
+        </button>
+        {skills.map((skl, index) => {
+          return (
+            <div className="skl Template">
+              {Object.entries(skl).map((slot) => {
+                const key = slot[0];
+                const value = slot[1];
+                if (key === "index") return;
+                return (
+                  <div className="inputWrapper">
+                    <label htmlFor={`edu${key}`}>{loc[key]}</label>
+                    {typeof value === "string" ? (
+                      <input
+                        type="text"
+                        className={`skl${key}`}
+                        id={`skl${key}`}
+                        value={value}
+                        onChange={(e) =>
+                          editSkill({ [key]: e.target.value, index: index })
+                        }
+                      />
+                    ) : (
+                      <select
+                        id={`skl${key}`}
+                        value={value}
+                        onChange={(e) =>
+                          editSkill({ [key]: +e.target.value, index: index })
+                        }
+                      >
+                        {Object.entries(skillLevels).map((level) => {
+                          return <option value={level[0]}>{level[1]}</option>;
+                        })}
+                      </select>
+                    )}
+                  </div>
+                );
+              })}
+              <button className="remove" onClick={() => removeSkill(index)}>
+                Remove
+              </button>
+            </div>
+          );
+        })}
       </div>
       <div className="edit Education">
         <button className="createNewEducation" onClick={addEducation}>

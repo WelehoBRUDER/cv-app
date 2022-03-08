@@ -39,6 +39,12 @@ function App() {
       end: 2019,
     },
   ]);
+  const [skills, setSkills] = React.useState([
+    {
+      skill: "Javascript",
+      level: 3,
+    },
+  ]);
 
   return (
     <div className="wrapper">
@@ -46,14 +52,17 @@ function App() {
         basicInfo={basicInfo}
         education={education}
         jobExperience={jobExperience}
+        skills={skills}
         setBasicInfo={setBasicInfo}
         setEducation={setEducation}
         setJobExperience={setJobExperience}
+        setSkills={setSkills}
       />
       <Output
         basicInfo={basicInfo}
         education={education}
         jobExperience={jobExperience}
+        skills={skills}
       />
     </div>
   );
