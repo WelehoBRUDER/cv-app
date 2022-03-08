@@ -32,8 +32,8 @@
 
     .Template {
       position: relative;
-      border: 8px solid $border-dark;
-      padding: 5px;
+      border: 4px solid $border-dark;
+      padding: 2px;
       margin: 10px;
       width: min-content;
 
@@ -42,11 +42,14 @@
         position: relative;
         width: 600px;
         height: auto;
-        border: 4px solid $border-light;
-        padding: 5px;
+        border: 2px solid $border-light;
+        padding: 1px;
         white-space: nowrap;
         margin: 5px;
         display: grid;
+        max-height: min-content;
+        align-items: center;
+        grid-template-columns: 1fr 1fr;
 
         label {
           font-size: 20px;
